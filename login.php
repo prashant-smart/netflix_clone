@@ -1,6 +1,22 @@
 <?php
+    require_once("includes/classes/formatString.php");
+    require_once("includes/classes/account.php");
+    require_once("includes/classes/constants.php");
+    require_once("includes/config.php");
+    $account = new Account($con);
     if(isset($_POST["submitButton"])){
-        echo "Form was submitted";
+        $userName =($_POST["userName"]);
+        $password = FormatString::formatPassword($_POST["password"]);
+        $success=$account->login($userName,$password);
+        if($success){
+            $_SESSION["userLoggedIn"]=$userName;//sotre in sesion
+            header("Location:index.php"); // redirect to index.php 
+        }
+    }
+    function getInputValues($val){
+        if(isset($_POST[$val])){
+            echo $_POST[$val];
+        }
     }
 ?>
 
@@ -25,7 +41,8 @@
             </div>
             <!-- form for user credentials related to account -->
             <form method="POST">
-                <input type="text" name="userName" placeholder="User Name" required>
+            <span style="color:red;font-size: small;"><?php echo $account->getError(Constants::$loginFailed); ?></span>
+                <input type="text" name="userName" placeholder="User Name" value="<?php getInputValues("userName")?>" required>
                 <input type="password" name="password" placeholder="Password" required>
                 <input type="submit" name="submitButton" value="SUBMIT">
             </form>

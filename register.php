@@ -15,8 +15,16 @@
         $email2 = FormatString::formatEmail($_POST["email2"]);
         $password = FormatString::formatPassword($_POST["password"]);
         $password2= FormatString::formatPassword($_POST["password"]);
-        $account->register($firstName,$lastName,$userName,$email,$email2,$password,$password2);
-
+        $success=$account->register($firstName,$lastName,$userName,$email,$email2,$password,$password2);
+        if($success){
+            $_SESSION["userLoggedIn"]=$userName;//sotre in sesion
+            header("Location:index.php");// redirect to index.php 
+        }
+    }
+    function getInputValues($val){
+        if(isset($_POST[$val])){
+            echo $_POST[$val];
+        }
     }
 ?>
 
@@ -42,21 +50,23 @@
             <!-- form for user credentials related to account -->
             <form method="POST">
                 <span style="color:red;font-size: small;"><?php echo $account->getError(Constants::$firstNameCharacter); ?></span>
-                <input type="text" name="firstName" placeholder="First Name" required>
+                <input type="text" name="firstName" placeholder="First Name" value="<?php getInputValues("firstName")?>" required>
                 
                 <span style="color:red;font-size: small;"><?php echo $account->getError(Constants::$lastNameCharacter); ?></span>
-                <input type="text" name="lastName" placeholder="Last Name" required>
+                <input type="text" name="lastName" placeholder="Last Name" value="<?php getInputValues("lastName")?>" required>
 
                 <span style="color:red;font-size: small;"><?php echo $account->getError(Constants::$userNameCharacter); ?></span>
                 <span style="color:red;font-size: small;"><?php echo $account->getError(Constants::$userNameTaken); ?></span>
-                <input type="text" name="userName" placeholder="User Name" required>
+                <input type="text" name="userName" placeholder="User Name" value="<?php getInputValues("userName")?>" required>
                 
                 <span style="color:red;font-size: small;"><?php echo $account->getError(Constants::$emailDontMatch); ?></span>
                 <span style="color:red;font-size: small;"><?php echo $account->getError(Constants::$emailNotValid); ?></span>
                 <span style="color:red;font-size: small;"><?php echo $account->getError(Constants::$emailTaken); ?></span>
-                <input type="email" name="email" placeholder="Email" required>
-                <input type="email" name="email2" placeholder="Confirm Email" required>
+                <input type="email" name="email" placeholder="Email" value="<?php getInputValues("email")?>" required>
+                <input type="email" name="email2" placeholder="Confirm Email" value="<?php getInputValues("email2")?>" required>
                 
+                <span style="color:red;font-size: small;"><?php echo $account->getError(Constants::$passwordDontMatch); ?></span>
+                <span style="color:red;font-size: small;"><?php echo $account->getError(Constants::$passwordLength); ?></span>
                 <input type="password" name="password" placeholder="Password" required>
                 <input type="password" name="password2" placeholder="Confirm Password" required>
                 
