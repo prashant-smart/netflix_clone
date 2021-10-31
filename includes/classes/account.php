@@ -1,5 +1,4 @@
 <?php
-   // include_once(include/classes/constants.php);
  class Account{
      private $con;
      private $errArray=array();
@@ -11,8 +10,6 @@
         $this->validateLastName($ln);
         $this->validateUserName($un);
         $this->validateEmails($em,$em2);
-        
-
      }
      private function validateFirstName($fn){ //this is private beacuse by this we can call this function only from inside of class
          if(strlen($fn)<2||strlen($fn)>25){
