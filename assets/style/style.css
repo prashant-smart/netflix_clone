@@ -160,8 +160,81 @@ a{
     padding: 10px 0;
 
 }
-.entities{
+.entities,
+.videos{
     overflow-x: auto;
     overflow-y: hidden;
     white-space: nowrap;
 }
+.previewCategories{
+    padding: 0 50px;
+}
+.errorBanner{
+    color: rgb(80, 77, 77);
+    position: absolute;
+    top: 25%;
+    width: 100%;
+    text-align: center;
+    font-size: 25px;
+    font-weight: bold;
+}
+.season{
+    display: flex;
+    flex-direction: column;
+    padding: 18px 50px;
+}
+.episodeContainer {
+    display: inline-flex;
+    justify-content: center;
+    margin-right: 9px;
+}
+.episodeContainer .contents{
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+}
+.episodeContainer img{
+    width: 200px;
+    height: 129px;
+    object-fit: cover;
+}
+.episodeContainer .videoInfo h4,
+.episodeContainer .videoInfo span{
+    color:white;
+    width: 100%;
+    white-space: normal;
+}
+.episodeContainer .videoInfo{
+    max-height: 200px;
+    overflow-y: hidden;
+}
+.previewCategories .noScroll .category .entities{
+    white-space: normal;
+}
+.watchContainer video{
+    width: 100%;
+}
+.videoControls{
+    position: absolute;
+    width: 100%;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    background-color: rgba(0,0,0,0.3);
+}
+.videoControls h1{
+    color: #fff;
+}
+.videoControls button{
+    font-size: 50px;
+    padding: 50px;
+    color: #fff;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+.videoControls button :hover{
+    border:2px solid blue;
+    padding:25px;
+}
+
