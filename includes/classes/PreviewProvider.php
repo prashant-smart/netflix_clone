@@ -9,10 +9,13 @@ class PreviewProvider {
         if($entity==null){
             $entity=$this->getRandomEntity();
         }
-        $name=$entity->getName();
         $id=$entity->getId();
-        $thumbnail=$entity->getThumbnail();
+        $name=$entity->getName();
         $preview=$entity->getPreview();
+        $thumbnail=$entity->getThumbnail();
+
+        
+
 
         return"<div class='previewContainer'>
                 
